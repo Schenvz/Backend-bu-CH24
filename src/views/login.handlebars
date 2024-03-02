@@ -9,17 +9,26 @@
       class="w-100 d-flex flex-column justify-content-center items-align-center"
     >
       <fieldset class="mb-3 text-center">
-        <label for="email" class="form-label mb-0">Email</label>
+        <label for="email" class="form-label mb-0">mail</label>
         <input type="text" class="form-control" id="email" />
       </fieldset>
       <fieldset class="mb-3 text-center">
-        <label for="password" class="form-label mb-0">Password</label>
+        <label for="password" class="form-label mb-0">pass</label>
         <input type="password" class="form-control" id="password" />
       </fieldset>
-      <button id="newEvent" type="button" class="w-100 btn btn-danger mt-3">Log
-        in!</button>
+      <button id="login" type="button" class="w-100 btn btn-danger mt-3">Login</button>
+      <button
+        id="google"
+        type="button"
+        class="w-100 btn btn-danger mt-3"
+      >Google</button>
+      <button
+        id="github"
+        type="button"
+        class="w-100 btn btn-danger mt-3"
+      >Github</button>
     </form>
   </section>
 </main>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/real.js"></script>
+<script src="/scripts/login.js"></script>
+<script src="/scripts/third.js"></script>

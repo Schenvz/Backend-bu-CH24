@@ -12,7 +12,7 @@ export default (socket) => {
       socketServer.emit("movies", events.readEvents());
     } catch (error) {
       console.log(error);
-      //emitir alert
+      //emitir una alerta
     }
   });
 };
