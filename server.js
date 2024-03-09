@@ -10,7 +10,7 @@ import pathHandler from "./src/middlewares/pathHandler.js";
 import __dirname from "./utils.js";
 import dbConnection from "./src/utils/dbConnection.util.js";
 
-//sv
+//server
 const server = express();
 const PORT = process.env.PORT || 8080;
 const ready = () => {
