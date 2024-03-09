@@ -5,7 +5,7 @@ const collection = "orders";
 const schema = new Schema(
   {
     user_id: { type: Types.ObjectId, required: true, ref: "users" },
-    event_id: { type: Types.ObjectId, required: true, ref: "events" },
+    clothe_id: { type: Types.ObjectId, required: true, ref: "clothes" },
     quantity: { type: Number, default: 1 },
     state: {
       type: String,
@@ -19,10 +19,10 @@ const schema = new Schema(
 schema.plugin(mongoosePaginate);
 
 schema.pre("find", function () {
-  this.populate("user_id", "-password -createdAt -updatedAt -__v");
+  this.populate("user_id", "-createdAt -updatedAt -__v");
 });
 schema.pre("find", function () {
-  this.populate("event_id", "name place price");
+  this.populate("clothe_id", "-createdAt -updatedAt -__v");
 });
 
 const Order = model(collection, schema);

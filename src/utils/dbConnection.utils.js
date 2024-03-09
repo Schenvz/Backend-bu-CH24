@@ -1,6 +1,6 @@
 import { connect } from "mongoose";
 
-export default async function dbConnection() {
+async function dbConnection() {
   try {
     await connect(process.env.DB_LINK);
     console.log("database connected");
@@ -8,3 +8,5 @@ export default async function dbConnection() {
     console.log(error);
   }
 }
+
+export default dbConnection;

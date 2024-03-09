@@ -1,14 +1,19 @@
-import { Router } from "express";
-import usersRouter from "./users.router.api.js";
-import eventsRouter from "./events.router.api.js";
-import ordersRouter from "./orders.router.api.js";
-import sessionsRouter from "./sessions.router.api.js";
+import CustomRouter from '../CustomRouter.js';
+import ClothesRouter from './clothes.router.api.js';
+import SessionsRouter from './sessions.router.api.js';
+import CategoriesRouter from './categories.router.api.js';
+import SizesRouter  from "./sizes.router.api.js";
 
-const apiRouter = Router();
+const session = new SessionsRouter();
+const clothes = new ClothesRouter();
+const categories = new CategoriesRouter();
+const sizes = new SizesRouter();
 
-apiRouter.use("/users", usersRouter);
-apiRouter.use("/events", eventsRouter);
-apiRouter.use("/orders", ordersRouter);
-apiRouter.use("/sessions", sessionsRouter);
-
-export default apiRouter;
+export default class ApiRouter extends CustomRouter {
+  init() {
+    this.use('/sessions', session.getRouter());
+    this.use('/clothes', clothes.getRouter());
+    this.use('/categories', categories.getRouter());
+    this.use("/sizes", sizes.getRouter())
+  }
+}
