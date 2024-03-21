@@ -22,7 +22,7 @@ selector.addEventListener("click", async () => {
     response = await response.json();
     response.statusCode === 201
       ? alert("Event created!")
-      : alert("ERROR: " + response.message);
+      : alert("ERROR: "+response.message);
   } catch (error) {
     alert(error.message);
   }

@@ -1,19 +1,19 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box
 }
 body {
   min-height: 100vh;
 }
 
 #background {
-  background-image: url("/public/fondo-abstracto.avif");
+  background-image: url("/image1.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 80%;
-  height: 100vh;
+  opacity: 90%;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -21,8 +21,16 @@ body {
   align-items: center;
 }
 
+.anchor {
+  text-decoration: none;
+}
+
+.anchor:hover {
+  background-color: rgb(144, 144, 144);
+}
+
 .title {
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 50px;
 }
 
@@ -31,14 +39,6 @@ body {
 }
 
 #arrow {
-  width: 200px;
-  margin-bottom: 150px;
-}
-
-.anchor {
-  text-decoration: none;
-}
-
-.anchor:hover {
-  background-color: rgb(230, 230, 230);
+  width: 220px;
+  margin-bottom: 130px;
 }

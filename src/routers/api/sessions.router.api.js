@@ -1,43 +1,53 @@
 import CustomRouter from "../CustomRouter.js";
-import passCallBackMid from "../../middlewares/passCallBack.mid.js";
+import passport from "../../middlewares/passport.mid.js";
+import passCallBack from "../../middlewares/passCallBack.mid.js";
+import {
+  register,
+  login,
+  google,
+  github,
+  me,
+  signout,
+  badauth,
+} from "../../controllers/sessions.controller.js";
 
-export default class SessionsRouter extends CustomRouter {
+class SessionsRouter extends CustomRouter {
   init() {
+    this.create("/register", ["PUBLIC"], passCallBack("register"), register);
+    this.create("/login", ["PUBLIC"], passCallBack("login"), login);
     this.create(
-      "/register",
+      "/google",
       ["PUBLIC"],
-      passCallBackMid("register"),
-      async (req, res, next) => {
-        try {
-          return res.message("Registered!");
-        } catch (error) {
-          return next(error);
-        }
-      }
+      passport.authenticate("google", { scope: ["email", "profile"] })
+    );
+    this.read(
+      "/google/callback",
+      ["PUBLIC"],
+      passport.authenticate("google", {
+        session: false,
+        failureRedirect: "/api/sessions/badauth",
+      }),
+      google
     );
     this.create(
-      "/login",
+      "/github",
       ["PUBLIC"],
-      passCallBackMid("login"),
-      async (req, res, next) => {
-        try {
-          return res
-            .cookie("token", req.token, {
-              maxAge: 7 * 24 * 60 * 60 * 1000,
-              httpOnly: true,
-            })
-            .message("Logged in!");
-        } catch (error) {
-          return next(error);
-        }
-      }
+      passport.authenticate("github", { scope: ["email", "profile"] })
     );
-    this.create("/signout", ["USER"], async (req, res, next) => {
-      try {
-        return res.clearCookie("token").message("Signed out!");
-      } catch (error) {
-        return next(error);
-      }
-    });
+    this.read(
+      "/github/callback",
+      ["PUBLIC"],
+      passport.authenticate("github", {
+        session: false,
+        failureRedirect: "/api/sessions/badauth",
+      }),
+      github
+    );
+    this.create("/", ["USER", "ADMIN", "PREM"], me);
+    this.create("/signout", ["USER", "ADMIN", "PREM"], signout);
+    this.read("/badauth", ["PUBLIC"], badauth);
   }
 }
+
+let sessionsRouter = new SessionsRouter();
+export default sessionsRouter.getRouter();
